@@ -56,11 +56,11 @@ RUN chmod 755 /usr/bin/jq
 
 RUN echo "export NODE_PATH=/usr/local/lib/node_modules" >> /home/build/.bashrc
 RUN echo "export M2_HOME=/usr/local/apache-maven-3.3.3" >> /home/build/.bashrc
-RUN echo "export PATH=\${M2_HOME}/bin:\${PATH}" >> /home/build/.bashrc
+RUN echo "export PATH=\${M2_HOME}/bin:/usr/local/bin:\${PATH}" >> /home/build/.bashrc
 
 RUN echo "export NODE_PATH=/usr/local/lib/node_modules" >> /root/.bashrc
 RUN echo "export M2_HOME=/usr/local/apache-maven-3.3.3" >> /root/.bashrc
-RUN echo "export PATH=\${M2_HOME}/bin:\${PATH}" >> /root/.bashrc
+RUN echo "export PATH=\${M2_HOME}/bin:/usr/local/bin:\${PATH}" >> /root/.bashrc
 
 # Set environment variables
 ENV HOME /root
