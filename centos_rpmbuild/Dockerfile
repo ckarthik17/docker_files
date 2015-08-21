@@ -49,11 +49,20 @@ RUN tar -xzf apache-maven-3.3.3-bin.tar.gz -C /usr/local
 RUN wget http://nodejs.org/dist/v0.12.7/node-v0.12.7-linux-x64.tar.gz
 RUN tar --strip-components 1 -xzvf node-v* -C /usr/local
 RUN npm install -g shelljs
+RUN npm install -g bower
+RUN npm install -g ember-cli
 
 RUN yum -y install tree
 RUN wget http://stedolan.github.io/jq/download/linux64/jq -O /usr/bin/jq
 RUN chmod 755 /usr/bin/jq
 
+RUN yum -y install ruby
+RUN yum -y install gcc g++ make automake autoconf curl-devel openssl-devel zlib-devel httpd-devel apr-devel apr-util-devel sqlite-devel
+RUN yum -y install ruby-rdoc ruby-devel
+RUN yum -y install rubygems
+RUN gem install rake
+
+# Set environment variables
 RUN echo "export NODE_PATH=/usr/local/lib/node_modules" >> /home/build/.bashrc
 RUN echo "export M2_HOME=/usr/local/apache-maven-3.3.3" >> /home/build/.bashrc
 RUN echo "export PATH=\${M2_HOME}/bin:/usr/local/bin:\${PATH}" >> /home/build/.bashrc
@@ -61,9 +70,6 @@ RUN echo "export PATH=\${M2_HOME}/bin:/usr/local/bin:\${PATH}" >> /home/build/.b
 RUN echo "export NODE_PATH=/usr/local/lib/node_modules" >> /root/.bashrc
 RUN echo "export M2_HOME=/usr/local/apache-maven-3.3.3" >> /root/.bashrc
 RUN echo "export PATH=\${M2_HOME}/bin:/usr/local/bin:\${PATH}" >> /root/.bashrc
-
-# Set environment variables
-ENV HOME /root
 
 # Set default `docker run` command behavior
 CMD /usr/sbin/sshd -D
